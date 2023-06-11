@@ -13,7 +13,7 @@ const ListStudents = () => {
         }
         setData(output);
       })  
-    }, []); //jak renderować tylko po zmianie
+    }, []); //jak renderować po każdej zmianie
 
   return (
     <div>{

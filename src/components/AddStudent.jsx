@@ -1,6 +1,6 @@
 // import { useEffect, useState } from "react";
 
-const ListStudents = () => {
+const AddStudent = () => {
   let first_name = document.getElementById("first_name").value;
   let last_name = document.getElementById("last_name").value;
 
@@ -17,7 +17,6 @@ const ListStudents = () => {
   })
   .then((response) => response.json())
   .then((json) => console.log(json));
-
 }
 
-export default ListStudents
+export default AddStudent
