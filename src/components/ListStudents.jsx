@@ -1,28 +1,32 @@
-import { useEffect, useState } from "react";
+import React, { useState } from 'react';
 
-const ListStudents = () => {
-  const [data, setData] = useState([]);
+function ListStudents() {
+  const [students, setStudents] = useState({});
 
-  useEffect(() => {
-    fetch("http://127.0.0.1:8000/students/")
-      .then((response) => response.json())
-      .then((actualData) => {
-        let output = []
-        for (let item in actualData) {
-          output.push(actualData[item])
-        }
-        setData(output);
-      })  
-    }, []); //jak renderować po każdej zmianie
+  const fetchStudents = async () => {
+    const response = await fetch('http://localhost:8000/students/');
+    const data = await response.json();
+    setStudents(data);
+  };
+
+  const handleShowStudents = () => {
+    fetchStudents();
+  };
 
   return (
-    <div>{
-      data.map(({ student_id, first_name, last_name }) => (
-      <p key={student_id}>Numer ID: {student_id} <br/>Imię: {first_name} <br/>Nazwisko: {last_name}</p>
-    ))}
+    <div>
+      <button onClick={handleShowStudents}>Show Students</button>
+      {Object.keys(students).length > 0 && (
+        <ol>
+          {Object.entries(students).map(([studentId, student]) => (
+            <li key={studentId}>
+              {student.first_name} {student.last_name}
+            </li>
+          ))}
+        </ol>
+      )}
     </div>
-  )
-
+  );
 }
 
-export default ListStudents
+export default ListStudents;

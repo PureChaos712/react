@@ -36,27 +36,3 @@
     transform: rotate(360deg);
   }
 }
-
-#ShowStudentsDiv {
-  display: none;
-  margin: 5px;
-}
-
-#AddStudentDiv {
-  display: none;
-  margin: 5px;
-} 
-
-#ChangeStudentDiv {
-  display: none;
-  margin: 5px;
-} 
-
-#AddMarkDiv {
-  display: none;
-  margin: 5px;
-}
-
-label, input, button {
-  margin: 5px;
-}
