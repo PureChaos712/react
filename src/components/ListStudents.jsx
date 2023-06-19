@@ -1,30 +1,23 @@
-import React, { useState } from 'react';
+import React from 'react';
 
-function ListStudents() {
-  const [students, setStudents] = useState({});
-
-  const fetchStudents = async () => {
-    const response = await fetch('http://localhost:8000/students/');
-    const data = await response.json();
-    setStudents(data);
-  };
-
-  const handleShowStudents = () => {
-    fetchStudents();
-  };
+function ListStudents({ students }) {
 
   return (
     <div>
-      <button onClick={handleShowStudents}>Show Students</button>
-      {Object.keys(students).length > 0 && (
+      {
         <ol>
+          {/* Object.entries -> takie śmieszne coś, co zmienia elementy z danej struktury danych (w tym przypadku elementy słownika) na tablicę 
+          [[1,{first_name:'Weronika', last_name: 'Bulanda'}],[2, {first_name: 'Maja', last_name: 'Bulanda'}]] */}
+
+          {/* map -> iterowanie po tablicy -> funkcja wykona się na każdym elemencie tablicy */}
+          
           {Object.entries(students).map(([studentId, student]) => (
             <li key={studentId}>
               {student.first_name} {student.last_name}
             </li>
           ))}
         </ol>
-      )}
+      }
     </div>
   );
 }
