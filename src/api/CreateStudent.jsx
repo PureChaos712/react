@@ -1,14 +1,14 @@
-const createStudent = async (studentName, studentSurname) => {
+const createStudent = async (BACKEND_URL, firstName, lastName) => {
     try {
-      if (studentName && studentSurname) {
-        await fetch('http://localhost:8000/students/', {
+      if (firstName && lastName) {
+        await fetch(`${BACKEND_URL}`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
           },
           body: JSON.stringify({
-            first_name: studentName,
-            last_name: studentSurname
+            first_name: firstName,
+            last_name: lastName
           })
         });
         return true;

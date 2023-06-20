@@ -9,6 +9,8 @@ import ChangeStudent from "./components/ChangeStudent";
 
 function App() {
 
+  let BACKEND_URL = "http://127.0.0.1:8000/students/"
+
   const [students, setStudents] = useState({});
   const [isShowingStudents, setIsShowingStudents] = useState(false);
   const [isShowingAddStudents, setIsShowingAddStudents] = useState(false);
@@ -29,13 +31,13 @@ function App() {
 
   const handleShowStudents = async () => {
     try {
-      const data = await fetchStudents();
+      const data = await fetchStudents(BACKEND_URL);
       setStudents(data);
       setIsShowingStudents(true);
       setIsShowingAddStudents(false)
       setIsShowingChangeStudent(false)
     } catch (error) {
-      console.log("An error occurred while fetching students: ", error);
+      console.log("Pojawił się błąd podczas pobierania listy studentów: ", error);
     }
   };
   
@@ -43,18 +45,18 @@ function App() {
   <div>
     <button onClick={handleShowStudents}>Show students</button>
     <button onClick={handleShowAddStudents}>Dodaj studenta</button>
-    <button onClick={handleShowChangeStudent}>Modyfikuj studenta</button>
+    <button onClick={handleShowChangeStudent}>Zmień studenta</button>
 
     {isShowingAddStudents && (
-      <AddStudent />
+      <AddStudent BACKEND_URL={BACKEND_URL} />
     )}
 
     {isShowingStudents && (
-      <ListStudents students={students}/>
+      <ListStudents students={students} />
     )}
 
     {isShowingChangeStudent && (
-      <ChangeStudent />
+      <ChangeStudent BACKEND_URL={BACKEND_URL} />
     )}
   </div>
   )

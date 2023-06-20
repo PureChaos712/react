@@ -1,47 +1,47 @@
 import React, { useState } from 'react';
 import createStudent from '../api/CreateStudent';
 
-function AddStudent() {
+function AddStudent({ BACKEND_URL }) {
   const [isAdded, setIsAdded] = useState(false);
-  const [studentName, setStudentName] = useState('');
-  const [studentSurname, setStudentSurname] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
 
   const handleCreateStudent = async () => {
     try {
-      const isSuccess = await createStudent(studentName, studentSurname);
+      const isSuccess = await createStudent(BACKEND_URL, firstName, lastName);
       setIsAdded(isSuccess);
     } catch (error) {
-      console.error('An error occurred while creating the student:', error);
+      console.error('Pojawił się błąd podczas tworzenia studenta: ', error);
       setIsAdded(false);
     }
   };
 
-  const handleNameChange = (event) => {
-    setStudentName(event.target.value);
+  const handleFirstNameChange = (event) => {
+    setFirstName(event.target.value);
   };
 
-  const handleSurnameChange = (event) => {
-    setStudentSurname(event.target.value);
+  const handleLastNameChange = (event) => {
+    setLastName(event.target.value);
   };
 
   return (
     <div>
-      <h1>Studenci</h1>
+      <h1>Nowy student</h1>
         <label>Imię:</label>
         <input
           type="text"
-          id="studentName"
-          value={studentName}
-          onChange={handleNameChange}
+          id="firstName"
+          value={firstName}
+          onChange={handleFirstNameChange}
         /><br />
         <label>Nazwisko:</label>
         <input
           type="text"
-          id="studentSurname"
-          value={studentSurname}
-          onChange={handleSurnameChange}
+          id="lastName"
+          value={lastName}
+          onChange={handleLastNameChange}
         /><br />
-      <button onClick={handleCreateStudent}>Dodaj studenta</button>
+      <button onClick={handleCreateStudent}>Zatwierdź studenta</button>
       {isAdded && 
       <p>Student stworzony</p>}
     </div>

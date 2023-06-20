@@ -1,18 +1,18 @@
 import React, { useState } from 'react';
 import updateStudent from '../api/UpdateStudent';
 
-function ChangeStudent() {
+function ChangeStudent({ BACKEND_URL }) {
   const [isChanged, setisChanged] = useState(false);
   const [studentId, setStudentId] = useState('');
-  const [studentName, setStudentName] = useState('');
-  const [studentSurname, setStudentSurname] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
 
   const handleChangeStudent = async () => {
     try {
-      const isSuccess = await updateStudent(studentId, studentName, studentSurname);
+      const isSuccess = await updateStudent(BACKEND_URL, studentId, firstName, lastName);
       setisChanged(isSuccess);
     } catch (error) {
-      console.error('An error occurred while creating the student:', error);
+      console.error('Pojawił się błąd podczas tworzenia studenta: ', error);
       setisChanged(false);
     }
   };
@@ -21,12 +21,12 @@ function ChangeStudent() {
     setStudentId(event.target.value);
   };
 
-  const handleNameChange = (event) => {
-    setStudentName(event.target.value);
+  const handleFirstNameChange = (event) => {
+    setFirstName(event.target.value);
   };
 
-  const handleSurnameChange = (event) => {
-    setStudentSurname(event.target.value);
+  const handleLastNameChange = (event) => {
+    setLastName(event.target.value);
   };
 
   return (
@@ -39,21 +39,21 @@ function ChangeStudent() {
         value={studentId}
         onChange={handleIdChange}
         /><br />
-        <label>Imię:</label>
+        <label>Nowe imię:</label>
         <input
           type="text"
-          id="studentName"
-          value={studentName}
-          onChange={handleNameChange}
+          id="firstName"
+          value={firstName}
+          onChange={handleFirstNameChange}
         /><br />
-        <label>Nazwisko:</label>
+        <label>Nowe nazwisko:</label>
         <input
           type="text"
-          id="studentSurname"
-          value={studentSurname}
-          onChange={handleSurnameChange}
+          id="lastName"
+          value={lastName}
+          onChange={handleLastNameChange}
         /><br />
-      <button onClick={handleChangeStudent}>Zmień studenta</button>
+      <button onClick={handleChangeStudent}>Zatwierdź zmiany</button>
       {isChanged && 
       <p>Student zmieniony</p>}
     </div>

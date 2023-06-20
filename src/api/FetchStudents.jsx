@@ -1,11 +1,11 @@
-const fetchStudents = async () => {
-    return fetch("http://127.0.0.1:8000/students/")
+const fetchStudents = async (BACKEND_URL) => {
+    return fetch(`${BACKEND_URL}`)
       .then(response => {
         console.log(response.status);
         return response.json();
       })
       .catch(error => {
-        console.log("An error occurred: ", error);
+        console.log("Pojawił się błąd: ", error);
       });
   };
   

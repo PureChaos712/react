@@ -37,10 +37,10 @@
   }
 }
 
-input, label, h1 {
-  margin: 10px;
+input, label, h1, p {
+  margin: 5px 10px;
 }
 
 button {
-  margin: 5px;
+  margin: 10px;
 }
